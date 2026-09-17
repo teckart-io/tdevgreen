@@ -27,6 +27,7 @@
       <a href="#realisations">Réalisations</a>
       <a href="#apropos">À propos</a>
       <a href="#contact">Contact</a>
+      <button type="button" class="btn btn-primary btn-sm nav-devis" data-open-devis>Demander un devis</button>
     </nav>
 
     <button type="button" class="btn btn-primary btn-sm header-cta" data-open-devis>
@@ -315,19 +316,23 @@
   <div class="modal-overlay" data-close-devis></div>
   <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="devis-title">
     <button type="button" class="modal-close" data-close-devis aria-label="Fermer">&times;</button>
-    <h2 id="devis-title">Demander un devis</h2>
-    <p class="modal-intro">Renseignez les informations de votre projet : nous revenons vers vous avec un devis personnalisé.</p>
+    <h2 id="devis-title">Fiche de pré-visite technique IRVE</h2>
+    <p class="modal-intro">
+      Renseignez un maximum d'informations sur votre installation : cela nous permet de préparer
+      un devis précis, avec le moins d'aller-retours possible. Les champs techniques que vous ne
+      connaissez pas peuvent rester vides — notre technicien les vérifiera lors de la visite.
+    </p>
 
-    <form class="devis-form" id="devis-form" action="assets/devis.php" method="post">
-      <h3>Vos coordonnées</h3>
+    <form class="devis-form" id="devis-form" action="assets/devis.php" method="post" enctype="multipart/form-data">
+      <h3><span class="devis-step">1</span> Vos coordonnées</h3>
       <div class="form-row">
         <label>
-          Nom complet
+          Nom / Société
           <input type="text" name="nom" required autocomplete="name">
         </label>
         <label>
-          Société
-          <input type="text" name="societe" autocomplete="organization">
+          Téléphone
+          <input type="tel" name="telephone" required autocomplete="tel">
         </label>
       </div>
       <div class="form-row">
@@ -336,68 +341,150 @@
           <input type="email" name="email" required autocomplete="email">
         </label>
         <label>
-          Téléphone
-          <input type="tel" name="telephone" required autocomplete="tel">
-        </label>
-      </div>
-
-      <h3>Votre projet</h3>
-      <div class="form-row">
-        <label>
-          Type de site
-          <select name="type_site" required>
-            <option value="">Sélectionner...</option>
-            <option>Résidentiel</option>
-            <option>Tertiaire / bureaux</option>
-            <option>Parking extérieur</option>
-            <option>Parking souterrain</option>
-            <option>Entrepôt logistique</option>
-            <option>Copropriété</option>
-            <option>Autre</option>
-          </select>
-        </label>
-        <label>
-          Délai souhaité
-          <select name="delai">
-            <option value="">Sélectionner...</option>
-            <option>Dès que possible</option>
-            <option>1 à 3 mois</option>
-            <option>3 à 6 mois</option>
-            <option>Plus de 6 mois</option>
-          </select>
-        </label>
-      </div>
-      <div class="form-row">
-        <label>
-          Adresse du site
-          <input type="text" name="adresse" required>
-        </label>
-        <label>
-          Code postal / Ville
-          <input type="text" name="ville" required>
-        </label>
-      </div>
-      <div class="form-row">
-        <label>
-          Nombre de bornes souhaitées
-          <input type="number" name="nb_bornes" min="1" step="1" required>
-        </label>
-        <label>
-          Puissance souhaitée
-          <select name="puissance">
-            <option value="">Je ne sais pas</option>
-            <option>7 kW</option>
-            <option>11 kW</option>
-            <option>22 kW</option>
-          </select>
+          Date souhaitée d'installation
+          <input type="date" name="date_souhaitee">
         </label>
       </div>
       <label>
-        Précisions complémentaires
-        <textarea name="message" rows="3" placeholder="Nombre de véhicules à recharger, contraintes du site, budget indicatif..."></textarea>
+        Adresse d'installation
+        <input type="text" name="adresse" required>
+      </label>
+      <div class="form-row">
+        <label>
+          Code postal
+          <input type="text" name="code_postal" required inputmode="numeric" pattern="[0-9]{5}">
+        </label>
+        <label>
+          Ville
+          <input type="text" name="ville" required>
+        </label>
+      </div>
+
+      <h3><span class="devis-step">2</span> Emplacement de la borne</h3>
+      <fieldset class="choice-group">
+        <legend>Type de pose</legend>
+        <label class="choice"><input type="radio" name="type_pose" value="Murale"><span>Murale</span></label>
+        <label class="choice"><input type="radio" name="type_pose" value="Sur pied"><span>Sur pied</span></label>
+        <label class="choice"><input type="radio" name="type_pose" value="En attente technique (goulotte)"><span>En attente technique (goulotte)</span></label>
+      </fieldset>
+      <fieldset class="choice-group">
+        <legend>Lieu</legend>
+        <label class="choice"><input type="radio" name="lieu" value="Garage"><span>Garage</span></label>
+        <label class="choice"><input type="radio" name="lieu" value="Extérieur"><span>Extérieur</span></label>
+        <label class="choice"><input type="radio" name="lieu" value="Parking / carport"><span>Parking / carport</span></label>
+      </fieldset>
+      <fieldset class="choice-group">
+        <legend>Nature du support</legend>
+        <label class="choice"><input type="radio" name="nature_support" value="Mur béton"><span>Mur béton</span></label>
+        <label class="choice"><input type="radio" name="nature_support" value="Mur brique/parpaing"><span>Mur brique/parpaing</span></label>
+        <label class="choice"><input type="radio" name="nature_support" value="Poteau à prévoir"><span>Poteau à prévoir</span></label>
+      </fieldset>
+      <label>
+        Distance borne ↔ véhicule stationné (estimation en m)
+        <input type="text" name="distance_borne_vehicule" placeholder="ex : 3 m">
+      </label>
+      <label class="file-field">
+        Photo de l'emplacement <span class="file-hint">(vue large + vue rapprochée du mur, si possible)</span>
+        <input type="file" name="photo_emplacement[]" accept="image/png,image/jpeg,image/webp" multiple>
       </label>
 
-      <button type="submit" class="btn btn-primary">Envoyer ma demande de devis</button>
+      <h3><span class="devis-step">3</span> Tableau électrique</h3>
+      <div class="form-row checkbox-row">
+        <label class="checkbox"><input type="checkbox" name="tableau_normes" value="oui"><span>Tableau aux normes (différentiel 30 mA visible)</span></label>
+      </div>
+      <label>
+        Distance tableau → borne (estimée, en m)
+        <input type="number" name="distance_tableau_borne" min="0" step="0.5">
+      </label>
+      <fieldset class="choice-group">
+        <legend>Passage des câbles</legend>
+        <label class="choice"><input type="radio" name="passage_cables" value="Apparent"><span>Apparent</span></label>
+        <label class="choice"><input type="radio" name="passage_cables" value="Sous gaine existante"><span>Sous gaine existante</span></label>
+        <label class="choice"><input type="radio" name="passage_cables" value="À créer"><span>À créer</span></label>
+      </fieldset>
+      <label>
+        Précisions (traversée mur, longueur, obstacles)
+        <textarea name="precisions_cables" rows="2"></textarea>
+      </label>
+      <label class="file-field">
+        Photo du tableau ouvert
+        <input type="file" name="photo_tableau" accept="image/png,image/jpeg,image/webp">
+      </label>
+
+      <h3><span class="devis-step">4</span> Compteur Linky</h3>
+      <div class="form-row">
+        <label>
+          Puissance souscrite (kVA)
+          <input type="number" name="puissance_souscrite" min="0" step="0.5">
+        </label>
+        <label>
+          PMAX affichée (kW)
+          <input type="number" name="pmax_affichee" min="0" step="0.1">
+        </label>
+      </div>
+      <label>
+        Numéro de compteur (PDL)
+        <input type="text" name="numero_pdl" inputmode="numeric" maxlength="14">
+      </label>
+      <label class="file-field">
+        Photo du compteur
+        <input type="file" name="photo_compteur" accept="image/png,image/jpeg,image/webp">
+      </label>
+
+      <h3><span class="devis-step">5</span> Disjoncteur de branchement</h3>
+      <div class="form-row">
+        <label>
+          Calibre (A)
+          <input type="number" name="calibre_disjoncteur" min="0" step="1">
+        </label>
+        <fieldset class="choice-group">
+          <legend>Type</legend>
+          <label class="choice"><input type="radio" name="type_alimentation" value="Monophasé"><span>Monophasé</span></label>
+          <label class="choice"><input type="radio" name="type_alimentation" value="Triphasé"><span>Triphasé</span></label>
+        </fieldset>
+      </div>
+      <label>
+        Marge disponible estimée après borne
+        <input type="text" name="marge_disponible">
+      </label>
+      <label class="file-field">
+        Photo du disjoncteur
+        <input type="file" name="photo_disjoncteur" accept="image/png,image/jpeg,image/webp">
+      </label>
+
+      <h3><span class="devis-step">6</span> Terre et protections</h3>
+      <div class="form-row checkbox-row checkbox-row-3">
+        <label class="checkbox"><input type="checkbox" name="terre_conforme" value="oui"><span>Prise de terre conforme</span></label>
+        <label class="checkbox"><input type="checkbox" name="parafoudre_present" value="oui"><span>Parafoudre présent</span></label>
+        <label class="checkbox"><input type="checkbox" name="ddr_a_ajouter" value="oui"><span>DDR 30 mA type A/B à ajouter</span></label>
+      </div>
+
+      <h3><span class="devis-step">7</span> Véhicule</h3>
+      <div class="form-row">
+        <label>
+          Marque
+          <input type="text" name="vehicule_marque">
+        </label>
+        <label>
+          Modèle
+          <input type="text" name="vehicule_modele">
+        </label>
+      </div>
+      <fieldset class="choice-group">
+        <legend>Puissance de charge souhaitée</legend>
+        <label class="choice"><input type="radio" name="puissance_charge" value="3,7 kW"><span>3,7 kW</span></label>
+        <label class="choice"><input type="radio" name="puissance_charge" value="7,4 kW"><span>7,4 kW</span></label>
+        <label class="choice"><input type="radio" name="puissance_charge" value="11 kW"><span>11 kW</span></label>
+        <label class="choice"><input type="radio" name="puissance_charge" value="22 kW"><span>22 kW</span></label>
+        <label class="choice"><input type="radio" name="puissance_charge" value="Je ne sais pas"><span>Je ne sais pas</span></label>
+      </fieldset>
+
+      <label>
+        Observations complémentaires
+        <textarea name="observations" rows="3" placeholder="Toute information utile pour préparer votre devis..."></textarea>
+      </label>
+
+      <button type="submit" class="btn btn-primary">Envoyer ma fiche de pré-visite</button>
       <p class="form-note" id="devis-form-note" hidden></p>
     </form>
   </div>

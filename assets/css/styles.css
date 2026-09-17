@@ -143,6 +143,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .main-nav a { color: var(--ink); opacity: .85; }
 .main-nav a:hover { opacity: 1; color: var(--green-600); }
+.nav-devis { display: none; }
 
 .header-cta { flex-shrink: 0; }
 
@@ -396,12 +397,97 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .contact-form button, .devis-form button { align-self: flex-start; }
 .devis-form h3 {
-  font-size: .85rem;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  color: var(--green-600);
-  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .88rem;
+  color: #fff;
+  background: var(--green-dark);
+  margin: 6px 0 0;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
 }
+.devis-form h3:first-child { margin-top: 0; }
+.devis-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--green-500);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.choice-group {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.choice-group legend {
+  width: 100%;
+  font-weight: 600;
+  font-size: .88rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+  padding: 0;
+}
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.choice span {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: .84rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--paper-soft);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.choice input:checked + span {
+  background: var(--green-500);
+  border-color: var(--green-500);
+  color: #fff;
+}
+.choice input:focus-visible + span { outline: 2px solid var(--green-600); outline-offset: 2px; }
+
+.checkbox-row { display: flex; flex-direction: column; gap: 10px; }
+.checkbox-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+.checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+  font-size: .88rem;
+}
+.checkbox input { width: 18px; height: 18px; accent-color: var(--green-500); flex-shrink: 0; }
+
+.file-field { gap: 8px !important; }
+.file-hint { font-weight: 400; color: var(--ink-soft); font-size: .8rem; }
+.devis-form input[type="file"] {
+  background: var(--paper-soft);
+  padding: 10px;
+  font-size: .82rem;
+}
+.devis-form input[type="file"]::file-selector-button {
+  font: inherit;
+  font-weight: 600;
+  padding: 7px 14px;
+  margin-right: 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--green-500);
+  color: #fff;
+  cursor: pointer;
+}
+
 .form-note { font-size: .88rem; font-weight: 600; }
 .form-note.success { color: var(--green-600); }
 .form-note.error { color: #b3271b; }
@@ -472,6 +558,7 @@ ul { list-style: none; margin: 0; padding: 0; }
     border-bottom: 1px solid var(--border);
     gap: 16px;
   }
+  .main-nav.open .nav-devis { display: inline-flex; align-self: flex-start; }
 }
 
 /* Modal (devis) */
@@ -565,4 +652,5 @@ ul { list-style: none; margin: 0; padding: 0; }
   .lightbox-prev { left: 6px; }
   .lightbox-next { right: 6px; }
   .lightbox-close { top: 10px; right: 10px; }
+  .checkbox-row-3 { grid-template-columns: 1fr; }
 }
