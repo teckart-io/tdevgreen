@@ -529,10 +529,13 @@ ul { list-style: none; margin: 0; padding: 0; }
   .gallery-item:first-child { grid-column: span 2; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .main-nav { display: none; }
   .nav-toggle { display: flex; }
   .header-cta { display: none; }
+}
+
+@media (max-width: 768px) {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .cards-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
@@ -542,7 +545,7 @@ ul { list-style: none; margin: 0; padding: 0; }
   .gallery-item:first-child { grid-column: span 1; grid-row: span 1; aspect-ratio: 4/3; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .main-nav.open {
     display: flex;
     flex-direction: column;
