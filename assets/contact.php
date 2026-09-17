@@ -35,7 +35,7 @@ if ($nom === "" || $message === "" || !filter_var($email, FILTER_VALIDATE_EMAIL)
     fail(422, "Merci de renseigner votre nom, un email valide et votre message.");
 }
 
-$sujet = "Nouvelle demande de devis IRVE — TDEVGREEN";
+$sujet = "Nouveau message — Formulaire de contact TDEVGREEN";
 
 $corps = "Nom : {$nom}\n";
 $corps .= $societe !== "" ? "Société : {$societe}\n" : "";

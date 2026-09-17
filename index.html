@@ -29,10 +29,10 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <a href="#contact" class="btn btn-primary btn-sm header-cta">
+    <button type="button" class="btn btn-primary btn-sm header-cta" data-open-devis>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.5"/><path d="m3 6 9 7 9-7" stroke="currentColor" stroke-width="1.5"/></svg>
       Demander un devis
-    </a>
+    </button>
 
     <button class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav">
       <span></span><span></span><span></span>
@@ -54,10 +54,10 @@
       </p>
       <div class="hero-actions">
         <a href="#services" class="btn btn-primary">Découvrir nos services</a>
-        <a href="#contact" class="btn btn-outline">
+        <button type="button" class="btn btn-outline" data-open-devis>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.5"/><path d="m3 6 9 7 9-7" stroke="currentColor" stroke-width="1.5"/></svg>
           Demander un devis
-        </a>
+        </button>
       </div>
     </div>
     <span class="signature">Aujourd'hui pour demain</span>
@@ -167,24 +167,24 @@
         logistiques et sites tertiaires en Île-de-France.
       </p>
 
-      <div class="gallery-grid">
-        <figure class="gallery-item">
+      <div class="gallery-grid" id="gallery-grid">
+        <figure class="gallery-item" tabindex="0" role="button" aria-label="Agrandir la photo">
           <img src="assets/img/realisations/realisation-04-bornes-exterieures.jpg" alt="Bornes de recharge sur poteaux le long d'un parking extérieur" loading="lazy">
           <figcaption>Bornes sur poteaux — parking extérieur</figcaption>
         </figure>
-        <figure class="gallery-item">
+        <figure class="gallery-item" tabindex="0" role="button" aria-label="Agrandir la photo">
           <img src="assets/img/realisations/realisation-01-parking-sous-sol.jpg" alt="Bornes de recharge installées en parking souterrain" loading="lazy">
           <figcaption>Installation en parking sous-sol</figcaption>
         </figure>
-        <figure class="gallery-item">
+        <figure class="gallery-item" tabindex="0" role="button" aria-label="Agrandir la photo">
           <img src="assets/img/realisations/realisation-02-parking-exterieur.jpg" alt="Bornes de recharge nouvellement installées près d'un parking extérieur" loading="lazy">
           <figcaption>Raccordement — parking extérieur</figcaption>
         </figure>
-        <figure class="gallery-item">
+        <figure class="gallery-item" tabindex="0" role="button" aria-label="Agrandir la photo">
           <img src="assets/img/realisations/realisation-03-entrepot.jpg" alt="Bornes de recharge installées le long d'un mur d'entrepôt logistique" loading="lazy">
           <figcaption>Installation en entrepôt logistique</figcaption>
         </figure>
-        <figure class="gallery-item">
+        <figure class="gallery-item" tabindex="0" role="button" aria-label="Agrandir la photo">
           <img src="assets/img/realisations/realisation-05-alignement-bornes.jpg" alt="Alignement de bornes de recharge le long d'une haie" loading="lazy">
           <figcaption>Alignement de bornes — site tertiaire</figcaption>
         </figure>
@@ -299,6 +299,109 @@
     <span class="footer-links"><a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a></span>
   </div>
 </footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <div class="lightbox-overlay" data-close-lightbox></div>
+  <button type="button" class="lightbox-close" data-close-lightbox aria-label="Fermer">&times;</button>
+  <button type="button" class="lightbox-nav lightbox-prev" id="lightbox-prev" aria-label="Photo précédente">&lsaquo;</button>
+  <figure class="lightbox-figure">
+    <img class="lightbox-img" id="lightbox-img" src="" alt="">
+    <figcaption id="lightbox-caption"></figcaption>
+  </figure>
+  <button type="button" class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Photo suivante">&rsaquo;</button>
+</div>
+
+<div class="modal" id="devis-modal" aria-hidden="true">
+  <div class="modal-overlay" data-close-devis></div>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="devis-title">
+    <button type="button" class="modal-close" data-close-devis aria-label="Fermer">&times;</button>
+    <h2 id="devis-title">Demander un devis</h2>
+    <p class="modal-intro">Renseignez les informations de votre projet : nous revenons vers vous avec un devis personnalisé.</p>
+
+    <form class="devis-form" id="devis-form" action="assets/devis.php" method="post">
+      <h3>Vos coordonnées</h3>
+      <div class="form-row">
+        <label>
+          Nom complet
+          <input type="text" name="nom" required autocomplete="name">
+        </label>
+        <label>
+          Société
+          <input type="text" name="societe" autocomplete="organization">
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          Email
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label>
+          Téléphone
+          <input type="tel" name="telephone" required autocomplete="tel">
+        </label>
+      </div>
+
+      <h3>Votre projet</h3>
+      <div class="form-row">
+        <label>
+          Type de site
+          <select name="type_site" required>
+            <option value="">Sélectionner...</option>
+            <option>Résidentiel</option>
+            <option>Tertiaire / bureaux</option>
+            <option>Parking extérieur</option>
+            <option>Parking souterrain</option>
+            <option>Entrepôt logistique</option>
+            <option>Copropriété</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <label>
+          Délai souhaité
+          <select name="delai">
+            <option value="">Sélectionner...</option>
+            <option>Dès que possible</option>
+            <option>1 à 3 mois</option>
+            <option>3 à 6 mois</option>
+            <option>Plus de 6 mois</option>
+          </select>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          Adresse du site
+          <input type="text" name="adresse" required>
+        </label>
+        <label>
+          Code postal / Ville
+          <input type="text" name="ville" required>
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          Nombre de bornes souhaitées
+          <input type="number" name="nb_bornes" min="1" step="1" required>
+        </label>
+        <label>
+          Puissance souhaitée
+          <select name="puissance">
+            <option value="">Je ne sais pas</option>
+            <option>7 kW</option>
+            <option>11 kW</option>
+            <option>22 kW</option>
+          </select>
+        </label>
+      </div>
+      <label>
+        Précisions complémentaires
+        <textarea name="message" rows="3" placeholder="Nombre de véhicules à recharger, contraintes du site, budget indicatif..."></textarea>
+      </label>
+
+      <button type="submit" class="btn btn-primary">Envoyer ma demande de devis</button>
+      <p class="form-note" id="devis-form-note" hidden></p>
+    </form>
+  </div>
+</div>
 
 <script src="assets/js/main.js"></script>
 </body>
