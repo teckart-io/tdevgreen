@@ -496,7 +496,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 .site-footer { background: var(--green-darker); color: rgba(255,255,255,.85); padding: 64px 0 0; }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
   gap: 40px;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,.12);
@@ -586,6 +586,12 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 .modal-dialog h2 { margin-bottom: .3em; }
 .modal-intro { margin-bottom: 1.4em; }
+.modal-intro a { display: inline-block; margin-top: 10px; font-weight: 700; color: var(--green-600); }
+.modal-intro a:hover { text-decoration: underline; }
+
+.guide-cta-link { margin-top: 18px; font-size: .9rem; color: var(--ink-soft); }
+.guide-cta-link a { font-weight: 700; color: var(--green-600); }
+.guide-cta-link a:hover { text-decoration: underline; }
 .modal-close {
   position: absolute;
   top: 16px;
@@ -653,4 +659,173 @@ ul { list-style: none; margin: 0; padding: 0; }
   .lightbox-next { right: 6px; }
   .lightbox-close { top: 10px; right: 10px; }
   .checkbox-row-3 { grid-template-columns: 1fr; }
+}
+
+/* Guide de pré-visite */
+.guide-hero {
+  background: linear-gradient(135deg, #1c3b27 0%, #0b1f16 60%, #143824 100%);
+  color: #fff;
+  padding: 80px 0;
+}
+.guide-hero-inner { max-width: 700px; }
+.guide-hero h1 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); }
+.guide-hero .hero-text { color: rgba(255,255,255,.85); }
+.guide-hero-points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  list-style: none;
+  margin: 22px 0;
+  padding: 0;
+}
+.guide-hero-points li {
+  font-weight: 600;
+  font-size: .9rem;
+  color: rgba(255,255,255,.9);
+}
+.guide-hero-points li::before { content: "✓ "; color: var(--green-500); font-weight: 800; }
+.guide-hero-contact { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 20px; }
+.guide-hero-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+}
+.guide-hero-contact a:hover { color: var(--green-500); }
+
+.guide-section { padding: 70px 0; }
+.guide-section-alt { background: var(--paper-soft); }
+.guide-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--green-500);
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.guide-section h2 { margin-bottom: .4em; }
+
+.guide-photo-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.guide-photo-grid-6 { grid-template-columns: repeat(3, 1fr); }
+.guide-photo-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow);
+}
+.guide-photo-card svg { color: var(--green-500); margin-bottom: 10px; }
+.guide-photo-card h3 { font-size: .98rem; margin-bottom: .3em; }
+.guide-photo-card p { font-size: .86rem; margin: 0; }
+.guide-photo-num {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green-dark);
+  color: #fff;
+  font-size: .74rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linky-steps {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+.linky-step h3 { font-size: 1rem; margin-bottom: .5em; }
+.linky-instructions { margin: 0 0 16px; padding-left: 20px; font-size: .9rem; color: var(--ink-soft); }
+.linky-instructions li { margin-bottom: 6px; }
+.linky-screen {
+  background: var(--green-darker);
+  color: #6ee787;
+  font-family: "Courier New", monospace;
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.linky-screen span { font-size: .78rem; letter-spacing: .05em; }
+.linky-screen strong { font-size: 1.2rem; }
+.linky-note { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: .88rem; flex-wrap: wrap; }
+.linky-note input[type="text"] {
+  font: inherit;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  background: var(--paper-soft);
+  color: var(--ink-soft);
+  width: 140px;
+}
+.linky-note-choice span { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; margin-right: 14px; }
+
+.guide-tip {
+  margin-top: 28px;
+  background: var(--paper-soft);
+  border-left: 4px solid var(--green-500);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  font-size: .9rem;
+  color: var(--ink);
+}
+.guide-tip-warning { border-left-color: #d99a1f; background: #fdf6e8; }
+
+.guide-checklist { margin-top: 30px; padding-left: 22px; display: flex; flex-direction: column; gap: 14px; }
+.guide-checklist li { font-size: .95rem; }
+
+.phase-grid { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.phase-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+.phase-card h3 { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; }
+.phase-tag {
+  font-size: .72rem;
+  font-weight: 800;
+  background: var(--green-dark);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+.phase-card p { font-size: .9rem; margin: 6px 0; }
+
+.table-scroll { margin-top: 30px; overflow-x: auto; }
+.guide-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow); }
+.guide-table th, .guide-table td { padding: 14px 16px; text-align: left; font-size: .88rem; border-bottom: 1px solid var(--border); }
+.guide-table th { background: var(--green-dark); color: #fff; font-weight: 700; }
+.guide-table tr:last-child td { border-bottom: none; }
+.table-footnote { margin-top: 10px; font-size: .8rem; color: var(--ink-soft); }
+
+.guide-final-checklist { margin-top: 30px; max-width: 560px; }
+.guide-thanks { margin-top: 24px; font-weight: 700; font-size: 1.05rem; }
+
+@media (max-width: 1024px) {
+  .guide-photo-grid, .guide-photo-grid-6 { grid-template-columns: repeat(2, 1fr); }
+  .linky-steps, .phase-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .guide-photo-grid, .guide-photo-grid-6 { grid-template-columns: 1fr; }
 }

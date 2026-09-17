@@ -61,16 +61,18 @@ bindAjaxForm(
   "Merci, votre demande de devis a bien été envoyée. Nous revenons vers vous rapidement."
 );
 
-/* Modale "Demander un devis" */
+/* Modale "Demander un devis" (absente sur certaines pages) */
 const devisModal = document.getElementById("devis-modal");
 
 function openDevisModal() {
+  if (!devisModal) return;
   devisModal.classList.add("is-open");
   devisModal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 }
 
 function closeDevisModal() {
+  if (!devisModal) return;
   devisModal.classList.remove("is-open");
   devisModal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
@@ -79,11 +81,13 @@ function closeDevisModal() {
 document.querySelectorAll("[data-open-devis]").forEach((btn) => {
   btn.addEventListener("click", openDevisModal);
 });
-devisModal.querySelectorAll("[data-close-devis]").forEach((btn) => {
-  btn.addEventListener("click", closeDevisModal);
-});
+if (devisModal) {
+  devisModal.querySelectorAll("[data-close-devis]").forEach((btn) => {
+    btn.addEventListener("click", closeDevisModal);
+  });
+}
 
-/* Lightbox galerie "Réalisations" */
+/* Lightbox galerie "Réalisations" (absente sur certaines pages) */
 const galleryItems = Array.from(document.querySelectorAll("#gallery-grid .gallery-item"));
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
@@ -100,6 +104,7 @@ function showLightboxImage(index) {
 }
 
 function openLightbox(index) {
+  if (!lightbox) return;
   showLightboxImage(index);
   lightbox.classList.add("is-open");
   lightbox.setAttribute("aria-hidden", "false");
@@ -107,6 +112,7 @@ function openLightbox(index) {
 }
 
 function closeLightbox() {
+  if (!lightbox) return;
   lightbox.classList.remove("is-open");
   lightbox.setAttribute("aria-hidden", "true");
   lightboxImg.src = "";
@@ -123,18 +129,20 @@ galleryItems.forEach((item, index) => {
   });
 });
 
-lightbox.querySelectorAll("[data-close-lightbox]").forEach((btn) => {
-  btn.addEventListener("click", closeLightbox);
-});
-document.getElementById("lightbox-prev").addEventListener("click", () => showLightboxImage(lightboxIndex - 1));
-document.getElementById("lightbox-next").addEventListener("click", () => showLightboxImage(lightboxIndex + 1));
+if (lightbox) {
+  lightbox.querySelectorAll("[data-close-lightbox]").forEach((btn) => {
+    btn.addEventListener("click", closeLightbox);
+  });
+  document.getElementById("lightbox-prev").addEventListener("click", () => showLightboxImage(lightboxIndex - 1));
+  document.getElementById("lightbox-next").addEventListener("click", () => showLightboxImage(lightboxIndex + 1));
+}
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    if (lightbox.classList.contains("is-open")) closeLightbox();
-    if (devisModal.classList.contains("is-open")) closeDevisModal();
+    if (lightbox && lightbox.classList.contains("is-open")) closeLightbox();
+    if (devisModal && devisModal.classList.contains("is-open")) closeDevisModal();
   }
-  if (lightbox.classList.contains("is-open")) {
+  if (lightbox && lightbox.classList.contains("is-open")) {
     if (event.key === "ArrowRight") showLightboxImage(lightboxIndex + 1);
     if (event.key === "ArrowLeft") showLightboxImage(lightboxIndex - 1);
   }
