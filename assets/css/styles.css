@@ -117,7 +117,7 @@ ul { list-style: none; margin: 0; padding: 0; }
 }
 
 .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.logo-leaf { color: var(--green-500); }
+.logo-mark { height: 38px; width: auto; display: block; }
 .logo-text {
   font-weight: 800;
   font-size: 1.15rem;
