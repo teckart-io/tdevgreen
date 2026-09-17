@@ -496,11 +496,6 @@ ul { list-style: none; margin: 0; padding: 0; }
 .footer-brand p { color: rgba(255,255,255,.65); margin: 16px 0; max-width: 320px; }
 .logo-footer { color: #fff; }
 .logo-footer .logo-tagline { color: rgba(255,255,255,.6); }
-.logo-footer .logo-mark-full {
-  background: #fff;
-  padding: 10px 16px;
-  border-radius: var(--radius-sm);
-}
 .footer-brand .signature { position: static; color: rgba(255,255,255,.5); transform: rotate(-2deg); display: inline-block; }
 
 .footer-col { display: flex; flex-direction: column; gap: 12px; }
